@@ -735,9 +735,6 @@ function installOpenVPN() {
 		echo "set_var EASYRSA_REQ_CN $SERVER_CN" >>vars
 		# PKI oluştur, CA, DH parametrelerini ve sunucu sertifikasını ayarla
 		./easyrsa init-pki
-		# easy-rsa 3.0.7 hatasını gidermek için geçici çözüm
-		# https://github.com/OpenVPN/easy-rsa/issues/261
-		sed -i 's/^RANDFILE/#RANDFILE/g' pki/openssl-easyrsa.cnf
 		./easyrsa --batch build-ca nopass
 		if [[ $DH_TYPE == "2" ]]; then
 			# ECDH anahtarları anlık olarak oluşturulur
